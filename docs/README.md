@@ -7,7 +7,7 @@ This directory contains:
 
 - [`dev/`](dev) for Python prototype and historical engineering documentation
 - [`research/`](research) for research framing, related work, interview materials, and evidence workflow
-- [`paper/`](paper) for the paper draft and study material
+- [`paper/`](paper/README.md) for the paper PDF and study material
 
 If you arrived here from GitHub, you may also want the repository landing page:
 
@@ -18,6 +18,7 @@ If you arrived here from GitHub, you may also want the repository landing page:
 - [Development Overview](dev/README.md)
 - [Historical Python Handoff](dev/CURRENT_STATUS.md)
 - [Research Index](research/README.md)
+- [Paper and Study Material](paper/README.md)
 
 ## Development Docs
 
