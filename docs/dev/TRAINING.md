@@ -1,5 +1,8 @@
 # Training Guide
 
+> Historical Python training notes. Some CLI examples below refer to an older
+> entry point; inspect `src/training/train_fencenet.py` before running them.
+
 This repository now includes a first-pass training workflow for FenceNet and BiFenceNet.
 
 ## 1. Install Dependencies

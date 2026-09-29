@@ -1,6 +1,10 @@
-# Current Status and Handoff
+# Historical Python Prototype Handoff
 
-Status: Active handoff note
+> This note describes the Python prototype as of 2026-05-18. For the current
+> Android app, read [../../android/README.md](../../android/README.md); for the
+> reorganized Python entry points, read [../../web/README.md](../../web/README.md).
+
+Status: Historical snapshot
 Last updated: 2026-05-18
 Purpose: Give the next developer or agent an accurate picture of the current codebase, what changed recently, what is actually runnable, and what still needs attention.
 
@@ -311,7 +315,7 @@ if the goal is:
 
 Use:
 
-- `python app.py`
+- `python -m web.app`
 
 if the goal is:
 
@@ -324,7 +328,7 @@ if the goal is:
 
 Use:
 
-- `python web_realtime.py`
+- `python -m web.web_realtime`
 
 if the goal is:
 

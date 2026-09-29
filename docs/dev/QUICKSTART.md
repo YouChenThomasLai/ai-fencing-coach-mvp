@@ -1,6 +1,6 @@
 # Quick Start
 
-This file is intentionally short. For the current runtime reality, read [CURRENT_STATUS.md](CURRENT_STATUS.md). For product scope and research framing, read [mvpspec.md](mvpspec.md).
+This guide covers the Python prototype. For the main Android app, see [../../android/README.md](../../android/README.md). For product scope and research framing, read [mvpspec.md](mvpspec.md).
 
 ## Setup
 
@@ -30,7 +30,7 @@ choose Gemini or the playbook-only summary for each run.
 ## Clip Analysis UI
 
 ```bash
-python app.py
+python -m web.app
 ```
 
 Open:
@@ -102,7 +102,7 @@ plain pose detection without persistent track IDs.
 ## Browser Live Webcam Streaming
 
 ```bash
-python web_realtime.py
+python -m web.web_realtime
 ```
 
 Open:
@@ -128,7 +128,7 @@ such as DroidCam, put the DroidCam video URL in `Camera Source`.
 ## Heuristic Visualizer UI
 
 ```bash
-python heuristic_visualizer.py
+python -m web.heuristic_visualizer
 ```
 
 Open:
@@ -150,7 +150,7 @@ Segment` only when you want the older segment-level summary.
 ## Realtime Heuristic Visualizer
 
 ```bash
-python realtime_heuristic_visualizer.py --source 0 --target-side left --mode "Footwork" --heuristic all
+python -m web.realtime_heuristic_visualizer --source 0 --target-side left --mode "Footwork" --heuristic all
 ```
 
 Use this when you want:
@@ -165,9 +165,9 @@ This is the lower-latency local OpenCV version of the debug panel in
 Useful flags:
 
 ```bash
-python realtime_heuristic_visualizer.py --source 0 --heuristic stance_too_high
-python realtime_heuristic_visualizer.py --source path/to/video.mp4 --log-csv web_outputs/heuristic_debug/logs/realtime_debug.csv
-python realtime_heuristic_visualizer.py --source 0 --pose-backend mock
+python -m web.realtime_heuristic_visualizer --source 0 --heuristic stance_too_high
+python -m web.realtime_heuristic_visualizer --source path/to/video.mp4 --log-csv web_outputs/heuristic_debug/logs/realtime_debug.csv
+python -m web.realtime_heuristic_visualizer --source 0 --pose-backend mock
 ```
 
 Controls:

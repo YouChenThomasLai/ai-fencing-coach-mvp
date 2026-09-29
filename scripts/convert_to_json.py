@@ -5,7 +5,7 @@ convert_to_json.py — 將 FFD/ 資料夾中的 mp4 影片轉換成 FencingDatas
                      (已升級使用 YOLOv8-Pose 引擎)
 
 用法:
-    python convert_to_json.py
+    python scripts/convert_to_json.py
 
 輸出:
     data/json_samples/ 資料夾下的 JSON 檔案，每支影片產生多個增強版本。

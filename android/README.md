@@ -1,87 +1,44 @@
-# Android On-Device App
+# Android 原生版
 
-Native Android v1 for the AI Fencing Coach. The app runs live coaching on the
-phone:
+這是目前主要的 App：Kotlin、Jetpack Compose、CameraX 與手機端模型推論。開啟 Android Studio 時選擇本 `android/` 資料夾；入口是 `app/src/main/java/com/aifencingcoach/MainActivity.kt`。
 
-```text
-CameraX frame
--> selected pose backend (MediaPipe or YOLO)
--> skeleton mapping
--> target lock + short-gap interpolation
--> SpatialNormalizer + FenceNet ONNX
--> Kotlin heuristics + feedback scheduler
--> overlay + Android TextToSpeech cue
--> post-practice review
-```
+## 已完成的功能
 
-## Setup
+下表的 `runtime/` 路徑均位於 `app/src/main/java/com/aifencingcoach/`。
 
-1. Install Python 3.11 or 3.12. Do not use Python 3.14 for the export
-   environment; NumPy/PyTorch/ONNX wheels may not exist for it yet on Windows.
-2. Create and activate a venv from the repo root:
+| 功能 | 實作位置 |
+| --- | --- |
+| 首頁、Realtime、Postgame、設定 | `app/src/main/java/com/aifencingcoach/MainActivity.kt` |
+| 即時鏡頭、姿態與骨架疊圖 | `runtime/PoseBackend.kt`、`runtime/LiveCoachPipeline.kt` |
+| MediaPipe／YOLO 姿態切換、目標追蹤 | `runtime/PoseBackend.kt`、`runtime/TargetTracker.kt` |
+| FenceNet ONNX、動作與姿勢判斷 | `runtime/FenceNetClassifier.kt`、`runtime/HeuristicsEngine.kt` |
+| 回饋排序、語音提示、練習報告 | `runtime/FeedbackScheduler.kt`、`runtime/PracticeReportBuilder.kt` |
+| 影片分析、標註影片匯出 | `runtime/PostgameVideoAnalyzer.kt`、`runtime/VideoAnnotator.kt` |
+| 本機練習歷史與詳情 | `runtime/database/`、`HistoryScreen.kt`、`SessionDetailScreen.kt` |
+| 離線 playbook、選用 Gemini／OpenAI 摘要 | `runtime/PlaybookRepository.kt`、`runtime/GeminiAgent.kt` |
+
+即時流程：CameraX → 姿態模型 → 目標鎖定 → 正規化與 FenceNet → 啟發式規則 → 畫面與語音回饋。Postgame 使用同一套手機端分析概念處理使用者選取的影片。核心流程不需要後端；AI 摘要是可選功能。
+
+App 使用直向畫面；預設後鏡頭。設定中可調整練習模式、姿態模型、目標側、語音、回饋項目和摘要方式。
+
+## 開啟與執行
+
+1. 用 Android Studio 開啟 `android/`，安裝它提示的 SDK／Gradle 元件。
+2. 確認 `app/src/main/assets/` 有 `fencenet_v2.onnx`、`yolo_pose.onnx`、`pose_landmarker_lite.task` 和中英文 playbook；目前專案已附這些檔案。
+3. 連接開啟 USB 偵錯的 Android 手機，執行 `app`。相機延遲請以實機測試。
+
+若要從 Python 權重重建 ONNX 資產，從**專案根目錄**執行：
 
 ```powershell
 py -3.11 -m venv .venv
 .\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip setuptools wheel
 python -m pip install -r requirements.txt
-```
-
-3. Open this `android/` folder in Android Studio.
-4. Let Android Studio install the Android SDK/Gradle files it recommends.
-5. Generate the ONNX assets from the repo root:
-
-```powershell
 python scripts/export_fencenet_onnx.py
 python scripts/export_yolo_pose_onnx.py
 ```
 
-6. Confirm these files exist:
+若需重抓 MediaPipe 模型，下載位置與檔名見 [`app/src/main/assets/README.md`](app/src/main/assets/README.md)。
 
-```text
-android/app/src/main/assets/fencenet_v2.onnx
-android/app/src/main/assets/pose_landmarker_lite.task
-android/app/src/main/assets/yolo_pose.onnx
-android/app/src/main/assets/coach_playbook.json
-```
+## 驗證
 
-The MediaPipe lite pose model is downloaded from:
-
-```text
-https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/latest/pose_landmarker_lite.task
-```
-
-## Run
-
-Use a physical Android phone. The emulator is not a meaningful test target for
-camera latency.
-
-From Android Studio:
-
-1. Select the `app` run configuration.
-2. Connect a phone with USB debugging enabled.
-3. Run the app.
-4. Point the back camera at a side-view fencing stance.
-
-## Current V1 Scope
-
-- Realtime live coach and selected-video Postgame analysis are the connected Android runtime paths.
-- No runtime backend.
-- App opens to a home screen with Realtime, Postgame, and User Settings.
-- Realtime has a compact setup screen that reads training mode, pose model, target side, voice, and feedback focus from User Settings before opening the camera.
-- The live coaching screen is camera-first: preview and skeleton overlay on top, current error/status and controls below.
-- Postgame reads clip-analysis and summary defaults from User Settings, runs selected videos through the on-device pose/FenceNet/heuristics pipeline, shows a processing progress bar, and displays the generated report.
-- User Settings is scrollable and includes user information, app defaults, Gemini/playbook summary preference, and per-error emphasize/mute checkboxes.
-- Pose backend, target side, training mode, voice, and feedback focus are configured in User Settings.
-- MediaPipe backend uses the MediaPipe Tasks pose landmarker.
-- YOLO backend runs `yolo_pose.onnx` through ONNX Runtime with local decoding/NMS.
-- Target tracker keeps the selected fencer locked through short pose dropouts.
-- FenceNet only receives active fencing frames; idle frames do not fill the model window.
-- HUD shows target lock, warmup progress, cue stack/history, FPS, latency, dropped-frame estimate, and session counts.
-- Live controls include pause/resume, voice, finish, reset, and menu.
-- Post-practice review summarizes time, active time, model checks, top action, repeated cues, and recent cue timeline.
-- Back camera by default.
-- Landscape orientation.
-- One selected target fencer plus optional opponent context.
-
-Clip review, summaries, cloud sync, and iOS are intentionally later phases.
+在 `android/` 內執行 `./gradlew testDebugUnitTest`（Windows：`.\gradlew.bat testDebugUnitTest`）。這會執行 `app/src/test/` 的單元測試；鏡頭、語音與效能仍需實機驗證。

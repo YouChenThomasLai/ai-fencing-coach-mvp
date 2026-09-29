@@ -1,5 +1,8 @@
 # MVP Specification and Research Workflow
 
+> Historical Python MVP specification. The current native app is documented in
+> [../../android/README.md](../../android/README.md).
+
 Note:
 
 - This file is the product and research spec.

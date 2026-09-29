@@ -1,5 +1,8 @@
 # Checkpoint Format
 
+> Historical Python prototype notes. Current Android model assets and export
+> commands are documented in [../../android/README.md](../../android/README.md).
+
 This project can load PyTorch checkpoints for the FenceNet/BiFenceNet action-recognition stage.
 
 Checkpoint loading is not the same as training. Training produces a checkpoint file; loading uses that file during video inference. This repository documents and validates the expected format, but it does not currently include trained fencing weights.

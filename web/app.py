@@ -6,7 +6,7 @@ import socket
 import time
 from pathlib import Path
 
-_REPO_ROOT = Path(__file__).resolve().parent
+_REPO_ROOT = Path(__file__).resolve().parents[1]
 _GRADIO_TEMP_DIR = _REPO_ROOT / "web_outputs" / "gradio_tmp"
 _UPLOAD_DIR = _REPO_ROOT / "web_outputs" / "uploads"
 _OUTPUT_DIR = _REPO_ROOT / "web_outputs" / "processed"
@@ -36,8 +36,8 @@ import gradio as gr
 import cv2
 from inference.sliding_window import FullVideoPipeline
 from inference.video_annotator import VideoAnnotator
-from database import Database
-from llm_agent import LLMAgent
+from web.database import Database
+from web.llm_agent import LLMAgent
 from src.realtime.feedback_config import available_error_keys_for_mode
 from src.realtime.feedback_scheduler import (
     build_feedback_preferences,
@@ -48,7 +48,7 @@ from src.realtime.realtime_voice_coach import RealtimeVoiceCoach
 import sqlite3
 
 # Load playbook for error_key → error_name resolution in UI
-_PLAYBOOK_PATH = Path(__file__).resolve().parent / "coach_playbook.json"
+_PLAYBOOK_PATH = _REPO_ROOT / "coach_playbook.json"
 with open(_PLAYBOOK_PATH, "r", encoding="utf-8") as _f:
     _PLAYBOOK = json.load(_f)
 

@@ -35,7 +35,7 @@ FEEDBACK_ONLY_SELECTED = False
 pipeline = None
 cap = None
 
-_PLAYBOOK_PATH = Path(__file__).resolve().parent / "coach_playbook.json"
+_PLAYBOOK_PATH = Path(__file__).resolve().parents[1] / "coach_playbook.json"
 
 
 def _load_playbook() -> dict:

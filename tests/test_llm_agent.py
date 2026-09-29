@@ -1,6 +1,6 @@
 from types import SimpleNamespace
 
-from llm_agent import LLMAgent
+from web.llm_agent import LLMAgent
 
 
 def _sample_actions():

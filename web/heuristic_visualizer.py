@@ -37,7 +37,7 @@ from inference.heuristics_engine import (
 from inference.sliding_window import FullVideoPipeline
 
 
-_REPO_ROOT = Path(__file__).resolve().parent
+_REPO_ROOT = Path(__file__).resolve().parents[1]
 _GRADIO_TEMP_DIR = _REPO_ROOT / "web_outputs" / "gradio_tmp"
 _UPLOAD_DIR = _REPO_ROOT / "web_outputs" / "heuristic_debug" / "uploads"
 _OUTPUT_DIR = _REPO_ROOT / "web_outputs" / "heuristic_debug" / "processed"

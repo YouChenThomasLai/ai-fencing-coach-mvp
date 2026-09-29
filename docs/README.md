@@ -1,9 +1,13 @@
 # Documentation Index
 
-This directory is organized into two sections:
+The current native app is documented in [../android/README.md](../android/README.md).
+The Python prototype is documented in [../web/README.md](../web/README.md).
 
-- [`dev/`](dev) for product, engineering, setup, and workflow documentation
+This directory contains:
+
+- [`dev/`](dev) for Python prototype and historical engineering documentation
 - [`research/`](research) for research framing, related work, interview materials, and evidence workflow
+- [`paper/`](paper) for the paper draft and study material
 
 If you arrived here from GitHub, you may also want the repository landing page:
 
@@ -12,13 +16,13 @@ If you arrived here from GitHub, you may also want the repository landing page:
 ## Start Here
 
 - [Development Overview](dev/README.md)
-- [Current Status and Handoff](dev/CURRENT_STATUS.md)
+- [Historical Python Handoff](dev/CURRENT_STATUS.md)
 - [Research Index](research/README.md)
 
 ## Development Docs
 
 - [Project Overview](dev/README.md)
-- [Current Status and Handoff](dev/CURRENT_STATUS.md)
+- [Historical Python Handoff](dev/CURRENT_STATUS.md)
 - [Next Agent Prompt](dev/NEXT_AGENT_PROMPT.md)
 - [MVP Spec](dev/mvpspec.md)
 - [Quickstart](dev/QUICKSTART.md)

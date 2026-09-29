@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 
 load_dotenv()  # reads .env into os.environ
 
-_PLAYBOOK_PATH = Path(__file__).resolve().parent / "coach_playbook.json"
+_PLAYBOOK_PATH = Path(__file__).resolve().parents[1] / "coach_playbook.json"
 try:
     with open(_PLAYBOOK_PATH, "r", encoding="utf-8") as _f:
         _PLAYBOOK = json.load(_f)

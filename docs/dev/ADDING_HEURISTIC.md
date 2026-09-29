@@ -32,7 +32,7 @@ threshold labels and metric-trigger checks stay aligned with runtime behavior.
 3. Add the error key to `HEURISTIC_ERROR_KEYS` in `inference/heuristics_engine.py`.
 4. Implement a `_check_*` method in `HeuristicsEngine` and call it from `_check_rules`.
 5. Add a matching metric function in `inference/heuristic_debug.py` so clip and realtime visualizers can show raw values.
-6. Add or update `HEURISTIC_NOTES` in `heuristic_visualizer.py`.
+6. Add or update `HEURISTIC_NOTES` in `web/heuristic_visualizer.py`.
 7. Add tests in `tests/test_feedback_config.py` and a focused heuristic test.
 
 If the playbook entry exists but detection is not implemented yet, mark it as

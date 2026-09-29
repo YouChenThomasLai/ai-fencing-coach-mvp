@@ -1,5 +1,8 @@
 # Prompt for the Next Codex Agent
 
+> Historical prompt from the Python prototype phase. Start with
+> [../../android/README.md](../../android/README.md) for the current app.
+
 Use this prompt when starting a new local Codex session for this project.
 
 ```text

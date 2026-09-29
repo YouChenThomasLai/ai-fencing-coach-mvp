@@ -1,6 +1,6 @@
 import json
 
-import web_realtime
+from web import web_realtime
 
 
 def test_status_includes_debug_fields_before_pipeline_initializes():
