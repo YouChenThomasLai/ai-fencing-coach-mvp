@@ -1,7 +1,7 @@
 """
 FenceNet v2 — Spec-compliant TCN for fencing action recognition.
 
-Architecture (from docs/dev/archive/FENCENET_TRAINING.md):
+Architecture:
   - TCNBlock with weight_norm + spatial dropout (p=0.2)
   - 6 stacked blocks with progressive channel widths and exponential dilation
   - Last time-step extraction → Dense(64, ReLU) → Dense(6, logits)
